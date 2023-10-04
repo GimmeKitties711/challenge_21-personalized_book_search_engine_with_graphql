@@ -5,19 +5,21 @@ const db = require('./config/connection');
 
 const { ApolloServer } = require('apollo-server-express'); // new
 const { authMiddleware } = require('./utils/auth'); // new
+// const { expressMiddleware } = require('@apollo/server/express4'); // new
 
-// const { typeDefs, resolvers } = require('./schemas'); // new
+const { typeDefs, resolvers } = require('./schemas'); // new
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 const server = new ApolloServer({
-  // typeDefs,
-  // resolvers,
+  typeDefs,
+  resolvers,
   context: authMiddleware,
 }); // new
 
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // if we're in production, serve client/build as static assets
@@ -34,11 +36,12 @@ app.get('/', (req, res) => {
 const startApolloServer = async () => {
   await server.start(); // new
   server.applyMiddleware({ app }); // new
-
+  // app.use('/graphql', expressMiddleware(server));
+  // console.log(process.env.NODE_ENV);
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`🌍 Now listening on localhost:${PORT}`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`); // what does 'server.graphqlPath' mean
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`); // link to GraphQL Sandbox
       // new
     });
   }); // moved inside StartApolloServer()
