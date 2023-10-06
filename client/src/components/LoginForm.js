@@ -30,19 +30,31 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await loginUser({ variables: userFormData }); //loginUser(userFormData);
+      const { data } = await loginUser({
+        variables: { ...userFormData }
+      }); //loginUser(userFormData);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      // const { token, user } = await response.json();
+      console.log(data);
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
+      // setShowAlert(true);
     }
+
+    // try {
+    //   const { data } = await createUser({
+    //     variables: { ...userFormData },
+    //   });
+    //   console.log(data);
+    //   Auth.login(data.addUser.token);
+    // } catch (err) {
+    //   console.error(err);
+    // }
 
     setUserFormData({
       username: '',
