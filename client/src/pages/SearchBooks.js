@@ -48,14 +48,16 @@ const SearchBooks = () => {
 
       const { items } = await response.json();
 
+      console.log(items);
+
       const bookData = items.map((book) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ['No author to display'],
         title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
+        description: book.volumeInfo.description || 'No description to display',
         image: book.volumeInfo.imageLinks?.thumbnail || '',
         // link: book.volumeInfo.link, // new
-        link: book.volumeInfo.link || '', // new
+        link: book.volumeInfo.canonicalVolumeLink || '', // new
       }));
 
       setSearchedBooks(bookData);
@@ -79,7 +81,8 @@ const SearchBooks = () => {
 
     try {
       const response = await saveBook({ variables : bookToSave }); // new
-
+      console.log(response);
+      console.log(response.ok)
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
@@ -136,7 +139,8 @@ const SearchBooks = () => {
                     <Card.Title>{book.title}</Card.Title>
                     <p className='small'>{(book.authors.length === 1) ? 'Author' : 'Authors' }: {book.authors.join(', ')}</p>
                     <Card.Text>{book.description}</Card.Text>
-                    <p className='small'>{book.link}</p>
+                    <a target='_blank' rel='noopener noreferrer' href={book.link} className='small'>{book.link ? 'Google Books link' : 'No link was found for this book'}</a>
+                    <br></br><br></br>
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
@@ -160,5 +164,7 @@ const SearchBooks = () => {
 
 // source for the join() method: https://www.geeksforgeeks.org/create-a-comma-separated-list-from-an-array-in-javascript/
 // the join() method was used to make the authors display as a comma separated list
+
+// source for how to make an anchor tag open a link in a new tab: https://www.freecodecamp.org/news/how-to-open-a-link-in-a-new-tab/
 
 export default SearchBooks;
