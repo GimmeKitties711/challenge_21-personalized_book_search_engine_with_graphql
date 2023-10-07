@@ -55,6 +55,7 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
         // link: book.volumeInfo.link, // new
+        link: book.volumeInfo.link || '', // new
       }));
 
       setSearchedBooks(bookData);
@@ -133,8 +134,9 @@ const SearchBooks = () => {
                   ) : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
-                    <p className='small'>Authors: {book.authors}</p>
+                    <p className='small'>{(book.authors.length === 1) ? 'Author' : 'Authors' }: {book.authors.join(', ')}</p>
                     <Card.Text>{book.description}</Card.Text>
+                    <p className='small'>{book.link}</p>
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
@@ -155,5 +157,8 @@ const SearchBooks = () => {
     </>
   );
 };
+
+// source for the join() method: https://www.geeksforgeeks.org/create-a-comma-separated-list-from-an-array-in-javascript/
+// the join() method was used to make the authors display as a comma separated list
 
 export default SearchBooks;

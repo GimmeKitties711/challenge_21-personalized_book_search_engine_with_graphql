@@ -30,7 +30,7 @@ const typeDefs = gql`
     }
 
     type Auth {
-        token: String
+        token: String!
         user: User
     }
 `;
