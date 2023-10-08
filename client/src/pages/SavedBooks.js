@@ -75,6 +75,8 @@ const SavedBooks = () => {
                     <Card.Title>{book.title}</Card.Title>
                     <p className='small'>Authors: {book.authors}</p>
                     <Card.Text>{book.description}</Card.Text>
+                    <a target='_blank' rel='noopener noreferrer' href={book.link} className='small'>{book.link ? 'Google Books link' : 'No link was found for this book'}</a>
+                    <br></br><br></br>
                     <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
                       Delete this Book!
                     </Button>
