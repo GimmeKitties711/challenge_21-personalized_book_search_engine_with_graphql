@@ -20,6 +20,8 @@ const SavedBooks = () => {
   }); // new
   const { loading, data } = useQuery(QUERY_GET_ME);
   const userData = data?.me || {};
+  console.log(userData)
+  console.log(userData.username)
 
   // use this to determine if `useEffect()` hook needs to run again
   //const userDataLength = Object.keys(userData).length;
@@ -56,14 +58,14 @@ const SavedBooks = () => {
     <>
       <div className="text-light bg-dark p-5">
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing {userData.username}'s saved books!</h1>
         </Container>
       </div>
       <Container>
         <h2 className='pt-5'>
           {userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
-            : 'You have no saved books!'}
+            : 'You have no saved books. Get started by clicking "Search for Books" in the top right corner.'}
         </h2>
         <Row>
           {userData.savedBooks.map((book) => {
