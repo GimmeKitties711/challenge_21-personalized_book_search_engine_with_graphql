@@ -17,17 +17,10 @@ import { QUERY_GET_ME } from '../utils/queries'; // new
 const SavedBooks = () => {
   const [removeBook, { error }] = useMutation(REMOVE_BOOK); // new
   const { loading, data } = useQuery(QUERY_GET_ME);
-  // const book = data.book || {};
-  // const books = data?.savedBooks || [];
-  const [userData, setUserData] = useState({});
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  const userData = data?.me || {};
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
-  //const [removeBook, { error }] = useMutation(REMOVE_BOOK); // new
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -38,14 +31,13 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await removeBook({ variables: bookId }); //deleteBook(bookId, token);
+      const response = await removeBook({ variables: bookId });
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
       const updatedUser = await response.json();
-      setUserData(updatedUser);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -55,12 +47,12 @@ const SavedBooks = () => {
 
   // if data isn't here yet, say so
   if (!userDataLength) {
-    return <h2>LOADING...</h2>;
+    return <h2>No books have been saved to this account yet. Get started by clicking on 'Search For Books' in the top right corner.</h2>;
   }
 
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div className="text-light bg-dark p-5">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
@@ -74,8 +66,8 @@ const SavedBooks = () => {
         <Row>
           {userData.savedBooks.map((book) => {
             return (
-              <Col md="4">
-                <Card key={book.bookId} border='dark'>
+              <Col key={book.bookId} md="4">
+                <Card border='dark'>
                   {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>

@@ -7,7 +7,16 @@ export const QUERY_GET_ME = gql`
             username
             email
             bookCount
-            savedBooks
+            savedBooks {
+                bookId
+                authors
+                description
+                title
+                image
+                link
+            }
         }
     }
 `;
+
+// savedBooks requires fields to be specified because graphql queries must return concrete data only: https://stackoverflow.com/questions/46111514/field-me-of-type-user-must-have-a-selection-of-subfields
