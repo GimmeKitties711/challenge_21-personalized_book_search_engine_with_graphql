@@ -48,7 +48,7 @@ const SearchBooks = () => {
 
       const { items } = await response.json();
 
-      console.log(items);
+      //console.log(items);
 
       const bookData = items.map((book) => ({
         bookId: book.id,
@@ -83,7 +83,7 @@ const SearchBooks = () => {
       const { data } = await saveBook({
         variables : { bookData: {...bookToSave} }
       }); // new
-      console.log(data);
+      //console.log(data);
 
       // if (!response.ok) {
       //   throw new Error('something went wrong!');
