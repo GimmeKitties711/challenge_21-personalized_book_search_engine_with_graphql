@@ -15,12 +15,14 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { QUERY_GET_ME } from '../utils/queries'; // new
 
 const SavedBooks = () => {
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK); // new
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK, {
+    refetchQueries: [QUERY_GET_ME],
+  }); // new
   const { loading, data } = useQuery(QUERY_GET_ME);
   const userData = data?.me || {};
 
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
+  //const userDataLength = Object.keys(userData).length;
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -31,13 +33,13 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await removeBook({ variables: bookId });
+      const response = await removeBook({ variables: { bookId } });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
-      const updatedUser = await response.json();
+      //const updatedUser = await response.json();
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -46,8 +48,8 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userDataLength) {
-    return <h2>No books have been saved to this account yet. Get started by clicking on 'Search For Books' in the top right corner.</h2>;
+  if (loading) {
+    return <h2>Loading...</h2>;
   }
 
   return (
