@@ -15,13 +15,11 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { QUERY_GET_ME } from '../utils/queries'; // new
 
 const SavedBooks = () => {
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK, {
+  const [removeBook] = useMutation(REMOVE_BOOK, {
     refetchQueries: [QUERY_GET_ME],
   }); // new
   const { loading, data } = useQuery(QUERY_GET_ME);
   const userData = data?.me || {};
-  console.log(userData)
-  console.log(userData.username)
 
   // use this to determine if `useEffect()` hook needs to run again
   //const userDataLength = Object.keys(userData).length;
