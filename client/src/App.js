@@ -17,9 +17,9 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-// this middleware will attach the JWT token to every request as an 'authorization' header
+// this middleware will attach the JWT token to every request as an authorization header
 const authLink = setContext((_, { headers }) => {
-  // if the authentication token exists, retrieve it from local storage
+  // if the authentication token exists, retrieve it from localStorage
   const token = localStorage.getItem('id_token');
   // return the headers to the context for httpLink to read
   return {
@@ -31,7 +31,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  // set up client to execute the 'authLink' middleware before making the request to the GraphQL API
+  // set up client to execute the authLink middleware before making the request to the GraphQL API
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });

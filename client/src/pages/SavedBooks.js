@@ -17,7 +17,7 @@ import { QUERY_GET_ME } from '../utils/queries';
 const SavedBooks = () => {
   const [removeBook] = useMutation(REMOVE_BOOK, {
     refetchQueries: [QUERY_GET_ME],
-  }); // refetchQueries updates savedBooks every time a book is deleted. this is necessary because the query is not automatically rerun when a mutation occurs.
+  }); // refetchQueries updates savedBooks every time a book is deleted. this is necessary because the GET_ME query is not automatically rerun when a mutation occurs.
   // source for refetchQueries: https://www.apollographql.com/docs/react/data/mutations/#refetching-queries
   const { loading, data } = useQuery(QUERY_GET_ME);
   const userData = data?.me || {}; // if data exists, store it in userData; otherwise, userData is an empty object {}
@@ -70,6 +70,7 @@ const SavedBooks = () => {
                     <Card.Text>{book.description}</Card.Text>
                     <a target='_blank' rel='noopener noreferrer' href={book.link} className='small'>{book.link ? 'Google Books link' : 'No link was found for this book'}</a>
                     <br></br><br></br>
+                    {/* make space between link and delete button */}
                     <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
                       Delete this Book!
                     </Button>

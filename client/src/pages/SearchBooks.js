@@ -134,10 +134,12 @@ const SearchBooks = () => {
                     <p className='small'>{(book.authors.length === 1) ? 'Author' : 'Authors' }: {book.authors.join(', ')}</p>
                     {/* source for the join() method: https://www.geeksforgeeks.org/create-a-comma-separated-list-from-an-array-in-javascript/
                     the join() method was used to make the authors display as a comma-separated list */}
+                    {/* this works because the length of the array ['No author to display'] (see line 53) is 1, resulting in 'Author: No author to display' */}
                     <Card.Text>{book.description}</Card.Text>
                     <a target='_blank' rel='noopener noreferrer' href={book.link} className='small'>{book.link ? 'Google Books link' : 'No link was found for this book'}</a>
                     {/* source for how to make an anchor tag open a link in a new tab: https://www.freecodecamp.org/news/how-to-open-a-link-in-a-new-tab/ */}
                     <br></br><br></br>
+                    {/* make space between link and save button */}
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}

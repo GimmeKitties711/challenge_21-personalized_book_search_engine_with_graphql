@@ -16,13 +16,13 @@ const resolvers = {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
-            if (!user) { // if there is no user with that email address
+            if (!user) { // if there is no user with the email address in question
               throw new AuthenticationError('No user found with this email address.');
             }
 
             const correctPassword = await user.isCorrectPassword(password);
 
-            if (!correctPassword) { // if the user enters the wrong password
+            if (!correctPassword) { // if the user enters an incorrect password
               throw new AuthenticationError('Incorrect credentials.');
             }
 

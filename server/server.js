@@ -18,7 +18,7 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// if we're in production, serve client/build as static assets
+// if we are in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
@@ -35,7 +35,7 @@ const startApolloServer = async () => {
       console.log(`🌍 Now listening on localhost:${PORT}`); // localhost:3001
       console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`); // link to GraphQL Sandbox
     });
-  }); // moved event listener inside StartApolloServer()
+  }); // moved event listener inside startApolloServer()
 };
 
 startApolloServer(); // call the function that starts the server

@@ -12,7 +12,7 @@ module.exports = {
 
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
-      // split the token into an array of components separated by spaces, remove the last element from the array, and trim whitespace from both ends of the element
+      // split the token into an array of substrings separated by spaces, remove the last element from the array, and trim whitespace from both ends of the element
       /*
       source for the split() method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
       source for the pop() method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop

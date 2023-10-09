@@ -26,7 +26,7 @@ export const removeBookId = (bookId) => {
   const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId);
   // filter out the book associated with bookId. the ? is a conditional check to make sure savedBookIds exists before trying to filter it. source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
   localStorage.setItem('saved_books', JSON.stringify(updatedSavedBookIds));
-  // update localStorage with the new savedBookIds array
+  // update localStorage with the new updateSavedBookIds array
 
   return true;
 };
