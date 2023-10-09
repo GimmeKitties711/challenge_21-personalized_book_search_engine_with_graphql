@@ -50,7 +50,7 @@ Once you have saved at least one book, you can click on `See your books` in the 
 ![Viewing saved books top of page](Assets/saved_books_top_of_page.png)
 ![Viewing saved books delete buttons](Assets/saved_books_delete_buttons.png)
 
-**Note:** If you have not saved any books yet, the saved books page will look like this:
+**Note:** If you have not saved any books yet, the saved books page will show this message:
 
 ![No saved books](Assets/no_saved_books.png)
 
