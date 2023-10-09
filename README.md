@@ -60,7 +60,7 @@ Once you have saved at least one book, you can click on `See Your Books` in the 
 
 ![No saved books message](Assets/no_saved_books.png)
 
-The deployed application can be found [here](insert link here once the project is deployed).
+The deployed application can be found [here](https://personalized-book-search-app-c1a85de82eb6.herokuapp.com/).
 
 ## Credits
 Received assistance in the *#02-ask-the-class* Slack channel from students Michael Taraschi, Avery Myers, and Mark Thostesen; TA Michael Seaman; and instructor Robbert Wijtman. Also received help from the following AskBCS assistants:
