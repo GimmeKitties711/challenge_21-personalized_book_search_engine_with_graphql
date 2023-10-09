@@ -73,6 +73,8 @@ Received assistance in the *#02-ask-the-class* Slack channel from students Micha
 6. Chris
 7. John
 8. Joem
+9. Ntombi
+10. Mia
 
 The following web resources helped me write the code for this project:
 
