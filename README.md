@@ -1,6 +1,4 @@
-# Challenge 21
-
-![GitHub license](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)
+# Challenge 21: Personalized Book Search Engine with GraphQL
 
 ## Description
 Reading books is important, as writing, both fiction and nonfiction, plays a significant part in bringing worlds to life or explaining important information. For example, you can follow characters into a fantasy world filled with magical creatures, or you can consult a cookbook for recipes to make dinner for your family. However, knowing where to look to find the right literature can be difficult, and many people would benefit greatly from a consolidated resource where they can search for books by topic. This app allows users to create an account, and once they are logged in, they can search for books by keyword, save them, acquire them by following their Google Books links, and delete them when they are no longer needed. This project taught me how to write typeDefs and resolvers and relate them to each other, handle queries and mutations on the front end and the back end, and import specific libraries from packages.
@@ -19,19 +17,75 @@ Reading books is important, as writing, both fiction and nonfiction, plays a sig
 No installation is required for this project.
 
 ## Usage
-Starting from the home page, you are presented with the menu options "Search for Books" and "Login/Sign Up". (insert picture of home page not logged in here). You can search for books when you are not logged in, but you will not be able to save them. (insert picture of search books while not logged in here, be sure to show not save button) If you do not have an existing account, or you would like to create a new one, click on `Login/Sign Up` in the top right corner and set the toggle to `Sign Up` (show picture of sign up toggle with no information entered here) If your inputs are invalid, such as entering an invalid email address, you will see the warning `Something went wrong with your signup!` (show invalid signup input here) If you enter a valid username, email, and password, you will be taken to the home page, where you can search for books, and this time they will appear with a save button (show logged in book search with same query as before, but with at least one of the save buttons already clicked) If you click the save button, the text will change to `This book has already been saved!` and the button will be no longer clickable (move this sentence before the picture). Once you have saved at least one book, you can click on `See your books` in the top right corner and you will be able to view all your saved books and delete them if you do not need to store them anymore (show saved books page not empty here) **Note:** If you have not saved any books yet, the saved books page will look like this: (show empty saved books page here) (also I think I forgot to mention invalid login input pic so I should put it next to invalid sign up pic)
+Starting from the home page, you are presented with the menu options `Search for Books` and `Login/Sign Up`.
+
+![Home page not logged in](Assets/home_page_not_logged_in.png)
+
+You can search for books when you are not logged in, but you will not be able to save them.
+
+![Search for books not logged in](Assets/search_for_books_not_logged_in.png)
+
+If you do not have an existing account, or you would like to create a new one, click on `Login/Sign Up` in the top right corner and set the toggle to `Sign Up`
+
+![Signup form](Assets/toggle_set_to_sign_up.png)
+
+If your inputs are invalid, such as entering an invalid email address, you will see the warning `Something went wrong with your signup!`
+
+![Invalid signup error message](Assets/invalid_sign_up_error_message.png)
+
+Logging in works in a similar way:
+
+**Login form:**
+![Login form](Assets/toggle_set_to_login.png)
+
+**Invalid input:**
+![Invalid login error message](Assets/invalid_login_error_message.png)
+
+If you enter a valid username, email, and password, you will be taken to the home page, where you can search for books, and this time they will appear with a save button. If you click the save button, the text will change to `This book has already been saved!` and the button will be no longer clickable
+
+![Search for books logged in](Assets/search_for_books_logged_in.png)
+
+Once you have saved at least one book, you can click on `See your books` in the top right corner and you will be able to view all your saved books and delete them if you do not need to store them anymore.
+
+![Viewing saved books top of page](Assets/saved_books_top_of_page.png)
+![Viewing saved books delete buttons](Assets/saved_books_delete_buttons.png)
+
+**Note:** If you have not saved any books yet, the saved books page will look like this:
+
+![No saved books](Assets/no_saved_books.png)
 
 ## Credits
-Received assistance from TA Michael Seaman, instructor Robbert Wijtman, and many AskBCS assistants: (list everyone from like the 10 fucking tickets I submitted here) The following web resources helped me write the code for this project: (list the web resources here)
+Received assistance in the *#02-ask-the-class* Slack channel from TA Michael Seaman and instructor Robbert Wijtman, and from the following AskBCS assistants:
+
+1. Alex
+2. Mampuru
+3. Adriane
+4. Zack
+5. Diego
+6. Chris
+7. John
+8. Joem
+
+The following web resources helped me write the code for this project:
+
+1. [The split() method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
+2. [The pop() method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)
+3. [The trim() method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim)
+4. [Stack Overflow: Field must have a selection of subfields](https://stackoverflow.com/questions/46111514/field-me-of-type-user-must-have-a-selection-of-subfields)
+5. [Optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+6. [The join() method](https://www.geeksforgeeks.org/create-a-comma-separated-list-from-an-array-in-javascript/)
+7. [How to make an anchor tag open a link in a new tab](https://www.freecodecamp.org/news/how-to-open-a-link-in-a-new-tab/)
+8. [refetchQueries](https://www.apollographql.com/docs/react/data/mutations/#refetching-queries)
+
 
 ## Contributing
-This application currently does not have safeguards in place to ensure that the user creates a valid password upon sign up. You can literally make your password `a` and it will be accepted as long as your username and email are valid. If someone could help me implement password strength verification that would be much appreciated.
+This application currently does not have safeguards in place to ensure that the user creates a valid password upon sign up. You can make your password `a` and it will be accepted as long as your username and email are valid. If someone could help me implement password strength verification that would be much appreciated.
 
 ## Tests
 No tests have been written for this application.
 
 ## License
-This project was created using the Boost Software License 1.0. More information about the license can be found [here](https://www.boost.org/users/license.html).
+No license is attached to this repository.
 
 ## Questions
 If you have any questions for me, you can [follow me on GitHub](https://github.com/GimmeKitties711) or email me at eric20wang.wang@gmail.com.
