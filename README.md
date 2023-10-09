@@ -41,7 +41,11 @@ Logging in works in a similar way:
 **Invalid input:**
 ![Invalid login error message](Assets/invalid_login_error_message.png)
 
-If you enter a valid username, email, and password, you will be taken to the home page, where you can search for books, and this time they will appear with a save button. If you click the save button, the text will change to `This book has already been saved!` and the button will be no longer clickable
+If you enter a valid username, email, and password, you will be taken to the home page, where you the headers are slightly different:
+
+![Home page logged in](Assets/home_page_logged_in.png)
+
+This time, searched books will have a save button. If you click the save button, the text will change to `This book has already been saved!` and the button will not be clickable anymore:
 
 ![Search for books logged in](Assets/search_for_books_logged_in.png)
 
