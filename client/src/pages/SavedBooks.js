@@ -56,7 +56,7 @@ const SavedBooks = () => {
         <h2 className='pt-5'>
           {userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
-            : 'You have no saved books. Get started by clicking "Search for Books" in the top right corner.'}
+            : 'You have no saved books. Get started by clicking "Search For Books" in the top right corner.'}
         </h2>
         <Row>
           {userData.savedBooks.map((book) => {
