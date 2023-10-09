@@ -66,7 +66,7 @@ const SavedBooks = () => {
                   {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
-                    <p className='small'>Authors: {book.authors}</p>
+                    <p className='small'>Authors: {book.authors.join(', ')}</p>
                     <Card.Text>{book.description}</Card.Text>
                     <a target='_blank' rel='noopener noreferrer' href={book.link} className='small'>{book.link ? 'Google Books link' : 'No link was found for this book'}</a>
                     <br></br><br></br>
