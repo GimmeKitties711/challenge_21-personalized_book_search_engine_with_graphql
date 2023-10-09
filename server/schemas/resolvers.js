@@ -5,8 +5,8 @@ const { signToken } =  require('../utils/auth');
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
-            if (context.user) {
-              return User.findOne({ _id: context.user._id });//.populate('savedBooks');
+            if (context.user) { // if the user is logged in
+              return User.findOne({ _id: context.user._id });
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -16,14 +16,14 @@ const resolvers = {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
-            if (!user) {
-              throw new AuthenticationError('No user found with this email address');
+            if (!user) { // if there is no user with that email address
+              throw new AuthenticationError('No user found with this email address.');
             }
 
             const correctPassword = await user.isCorrectPassword(password);
 
-            if (!correctPassword) {
-              throw new AuthenticationError('Incorrect credentials');
+            if (!correctPassword) { // if the user enters the wrong password
+              throw new AuthenticationError('Incorrect credentials.');
             }
 
             const token = signToken(user);
@@ -39,7 +39,7 @@ const resolvers = {
             if (context.user) {
                 let updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { savedBooks: bookData } },
+                    { $push: { savedBooks: bookData } }, // add the book corresponding to bookData to the savedBooks array
                     { new: true }
                 );
 
@@ -51,7 +51,7 @@ const resolvers = {
             if (context.user) {
                 let updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { savedBooks: { bookId } } }
+                    { $pull: { savedBooks: { bookId } } } // remove the book corresponding to bookId from savedBooks
                 );
 
                 return updatedUser;

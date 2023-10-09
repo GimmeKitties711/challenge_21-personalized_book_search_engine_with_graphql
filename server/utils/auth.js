@@ -5,37 +5,38 @@ const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
 module.exports = {
-  // function for our authenticated routes
-  authMiddleware: function ({ req }) { //, res, next) {
-    // allows token to be sent via req.query or headers
-    let token = req.body.token || req.query.token || req.headers.authorization; // added req.body.token
+  // authentication function
+  authMiddleware: function ({ req, res }) {
+    // allows token to be sent via req.(body/query/headers)
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
-      //console.log('Token: ', token);
+      // split the token into an array of components separated by spaces, remove the last element from the array, and trim whitespace from both ends of the element
+      /*
+      source for the split() method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+      source for the pop() method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
+      source for the trim() method: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
+      */
     }
 
     if (!token) {
-      // return res.status(400).json({ message: 'You have no token!' });
       console.log('You have no token.');
     }
 
-    // verify token and get user data out of it
+    // verify the token and extract user data from it
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
       console.log('Invalid token.');
-      // return res.status(400).json({ message: 'invalid token!' });
     }
 
-    // send to next endpoint
-    return req; //next();
+    return req;
   },
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
 
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration }); // you can only stay logged in for 2 hours before being logged out
   },
 };

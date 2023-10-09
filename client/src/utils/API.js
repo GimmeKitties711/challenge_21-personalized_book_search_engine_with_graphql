@@ -6,7 +6,7 @@ export const getMe = (token) => {
       authorization: `Bearer ${token}`,
     },
   });
-};
+}; // replaced by QUERY_GET_ME
 
 export const createUser = (userData) => {
   return fetch('/api/users', {
@@ -16,7 +16,7 @@ export const createUser = (userData) => {
     },
     body: JSON.stringify(userData),
   });
-};
+}; // replaced by mutation ADD_USER
 
 export const loginUser = (userData) => {
   return fetch('/api/users/login', {
@@ -26,7 +26,7 @@ export const loginUser = (userData) => {
     },
     body: JSON.stringify(userData),
   });
-};
+}; // replaced by mutation LOGIN_USER
 
 // save book data for a logged in user
 export const saveBook = (bookData, token) => {
@@ -38,7 +38,7 @@ export const saveBook = (bookData, token) => {
     },
     body: JSON.stringify(bookData),
   });
-};
+}; // replaced by mutation SAVE_BOOK
 
 // remove saved book data for a logged in user
 export const deleteBook = (bookId, token) => {
@@ -48,10 +48,10 @@ export const deleteBook = (bookId, token) => {
       authorization: `Bearer ${token}`,
     },
   });
-};
+}; // replaced by mutation REMOVE_BOOK
 
 // make a search to google books api
 // https://www.googleapis.com/books/v1/volumes?q=harry+potter
 export const searchGoogleBooks = (query) => {
   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-};
+}; // used in SearchBooks.js

@@ -1,28 +1,21 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-// const routes = require('./routes');
 
-const { ApolloServer } = require('apollo-server-express'); // new
-const { authMiddleware } = require('./utils/auth'); // new
-// const { expressMiddleware } = require('@apollo/server/express4'); // new
-
-const { typeDefs, resolvers } = require('./schemas'); // new
+const { ApolloServer } = require('apollo-server-express');
+const { authMiddleware } = require('./utils/auth');
+const { typeDefs, resolvers } = require('./schemas');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-// const PORT = process.env.PORT || 3000; // new
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // context: authMiddleware,
-  // context: authMiddleware,
   context: authMiddleware,
-}); // new
+}); // set up the Apollo Server with the necessary components
 
-//app.use(express.urlencoded({ extended: true }));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // if we're in production, serve client/build as static assets
@@ -32,22 +25,17 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-}); // new
-
-// app.use(routes);
+});
 
 const startApolloServer = async () => {
-  await server.start(); // new
-  server.applyMiddleware({ app }); // new
-  // app.use('/graphql', expressMiddleware(server));
-  // console.log(process.env.NODE_ENV);
-  db.once('open', () => {
+  await server.start();
+  server.applyMiddleware({ app }); // apply the Apollo Server instance to the Express server as middleware
+  db.once('open', () => { // add a one-time event listener that will execute when the database connection is opened
     app.listen(PORT, () => {
-      console.log(`🌍 Now listening on localhost:${PORT}`);
+      console.log(`🌍 Now listening on localhost:${PORT}`); // localhost:3001
       console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`); // link to GraphQL Sandbox
-      // new
     });
-  }); // moved inside StartApolloServer()
-}; // new
+  }); // moved event listener inside StartApolloServer()
+};
 
-startApolloServer(); // new
+startApolloServer(); // call the function that starts the server

@@ -4,25 +4,24 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
-import { setContext } from '@apollo/client/link/context'; // new
+import { setContext } from '@apollo/client/link/context';
 import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
   ApolloProvider
-} from '@apollo/client'; // new
+} from '@apollo/client';
 
-// new
-// Construct our main GraphQL API endpoint
+// create main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+// this middleware will attach the JWT token to every request as an 'authorization' header
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
+  // if the authentication token exists, retrieve it from local storage
   const token = localStorage.getItem('id_token');
-  // return the headers to the context so httpLink can read them
+  // return the headers to the context for httpLink to read
   return {
     headers: {
       ...headers,
@@ -32,11 +31,10 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  // set up client to execute the 'authLink' middleware before making the request to the GraphQL API
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-// new
 
 function App() {
   return (

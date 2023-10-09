@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; //useEffect } from 'react';
+import React from 'react';
 import {
   Container,
   Card,
@@ -7,22 +7,20 @@ import {
   Col
 } from 'react-bootstrap';
 
-//import { getMe } from '../utils/API'; //deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
-import { useMutation, useQuery } from '@apollo/client'; // new
 import { REMOVE_BOOK } from '../utils/mutations';
-import { QUERY_GET_ME } from '../utils/queries'; // new
+
+import { useMutation, useQuery } from '@apollo/client';
+import { QUERY_GET_ME } from '../utils/queries';
 
 const SavedBooks = () => {
   const [removeBook] = useMutation(REMOVE_BOOK, {
     refetchQueries: [QUERY_GET_ME],
-  }); // new
+  }); // refetchQueries updates savedBooks every time a book is deleted. this is necessary because the query is not automatically rerun when a mutation occurs.
+  // source for refetchQueries: https://www.apollographql.com/docs/react/data/mutations/#refetching-queries
   const { loading, data } = useQuery(QUERY_GET_ME);
-  const userData = data?.me || {};
-
-  // use this to determine if `useEffect()` hook needs to run again
-  //const userDataLength = Object.keys(userData).length;
+  const userData = data?.me || {}; // if data exists, store it in userData; otherwise, userData is an empty object {}
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {

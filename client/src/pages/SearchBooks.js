@@ -9,10 +9,10 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchGoogleBooks } from '../utils/API'; //{ saveBook, searchGoogleBooks } from '../utils/API';
+import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { useMutation } from '@apollo/client'; // new
-import { SAVE_BOOK } from '../utils/mutations'; // new
+import { useMutation } from '@apollo/client';
+import { SAVE_BOOK } from '../utils/mutations';
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -23,7 +23,7 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
-  const [saveBook] = useMutation(SAVE_BOOK); //{ error, data }] = useMutation(SAVE_BOOK); // new
+  const [saveBook] = useMutation(SAVE_BOOK);
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -35,7 +35,7 @@ const SearchBooks = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (!searchInput) {
+    if (!searchInput) { // if searchInput is empty, return false and exit the function
       return false;
     }
 
@@ -48,16 +48,13 @@ const SearchBooks = () => {
 
       const { items } = await response.json();
 
-      //console.log(items);
-
       const bookData = items.map((book) => ({
         bookId: book.id,
-        authors: book.volumeInfo.authors || ['No author to display'],
+        authors: book.volumeInfo.authors || ['No author to display'], // some books do not have an author
         title: book.volumeInfo.title,
-        description: book.volumeInfo.description || 'No description to display',
+        description: book.volumeInfo.description || 'No description to display', // some books do not have a description
         image: book.volumeInfo.imageLinks?.thumbnail || '',
-        // link: book.volumeInfo.link, // new
-        link: book.volumeInfo.canonicalVolumeLink || '', // new
+        link: book.volumeInfo.canonicalVolumeLink || '',
       }));
 
       setSearchedBooks(bookData);
@@ -82,7 +79,7 @@ const SearchBooks = () => {
     try {
       const { data } = await saveBook({
         variables : { bookData: {...bookToSave} }
-      }); // new
+      });
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
@@ -135,8 +132,11 @@ const SearchBooks = () => {
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
                     <p className='small'>{(book.authors.length === 1) ? 'Author' : 'Authors' }: {book.authors.join(', ')}</p>
+                    {/* source for the join() method: https://www.geeksforgeeks.org/create-a-comma-separated-list-from-an-array-in-javascript/
+                    the join() method was used to make the authors display as a comma-separated list */}
                     <Card.Text>{book.description}</Card.Text>
                     <a target='_blank' rel='noopener noreferrer' href={book.link} className='small'>{book.link ? 'Google Books link' : 'No link was found for this book'}</a>
+                    {/* source for how to make an anchor tag open a link in a new tab: https://www.freecodecamp.org/news/how-to-open-a-link-in-a-new-tab/ */}
                     <br></br><br></br>
                     {Auth.loggedIn() && (
                       <Button
@@ -158,10 +158,5 @@ const SearchBooks = () => {
     </>
   );
 };
-
-// source for the join() method: https://www.geeksforgeeks.org/create-a-comma-separated-list-from-an-array-in-javascript/
-// the join() method was used to make the authors display as a comma separated list
-
-// source for how to make an anchor tag open a link in a new tab: https://www.freecodecamp.org/news/how-to-open-a-link-in-a-new-tab/
 
 export default SearchBooks;
