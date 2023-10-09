@@ -55,7 +55,7 @@ Once you have saved at least one book, you can click on `See your books` in the 
 ![No saved books](Assets/no_saved_books.png)
 
 ## Credits
-Received assistance in the *#02-ask-the-class* Slack channel from TA Michael Seaman and instructor Robbert Wijtman, and from the following AskBCS assistants:
+Received assistance in the *#02-ask-the-class* Slack channel from students Michael Taraschi and Avery Myers, TA Michael Seaman, and instructor Robbert Wijtman. Also received help from the following AskBCS assistants:
 
 1. Alex
 2. Mampuru
